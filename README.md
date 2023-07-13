@@ -1,1 +1,1 @@
-# Rock-Paper-Scissor
+Project based on rock paper scissor
