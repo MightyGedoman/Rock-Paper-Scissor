@@ -1,0 +1,40 @@
+body {
+    background-color: darkgrey;
+}
+
+
+.selection {
+    align-items: center;
+    transition: 0.2s;
+}
+
+.selections button {
+    margin: 0;
+    width: 180px;
+    height: 160px;
+    background-color: yellow;
+    border-color: black;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+}
+
+.selections {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 33.3333%;
+
+}
+
+.selection:hover{
+    transform: scale(1.2);
+}
+
+.results {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+}
