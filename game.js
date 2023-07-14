@@ -1,17 +1,31 @@
-console.log("Welcome")
+console.log("Welcome");
 
-const option = ["rock", "paper", "scissor"]
+const option = ["rock", "paper", "scissor"];
+
+const buttons = document.querySelectorAll('button');
+
+
 
 function getComputerChoice() {
     const choice = option[Math.floor(Math.random() * option.length)]
     return choice
 }
 
-function getPlayerChoice() {
+
+function getPlayerChoice(callback) {
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const player = button.textContent;
+      callback(player);
+    }));
+}
+
+
+// This is for the Typing method
+/* function getPlayerChoice() {
     let valid = false;
     while(valid !== true){
         const choice = prompt('please input Rock, Paper, Scissor')
-        if(choice ==null){
+        if(choice == null){
             continue
         }
         const lowerChoice = choice.toLowerCase();
@@ -22,7 +36,7 @@ function getPlayerChoice() {
 
         
     }
-}
+} */
 
 function playRound(playerSelection, computerSelection){
     const result = checkWinner(playerSelection, computerSelection);

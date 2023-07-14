@@ -3,38 +3,44 @@ body {
 }
 
 
-.selection {
-    align-items: center;
-    transition: 0.2s;
-}
 
 .selections button {
     margin: 0;
-    width: 180px;
-    height: 160px;
+    width: 260px;
+    height: 240px;
     background-color: yellow;
     border-color: black;
     align-items: center;
-    justify-content: center;
     cursor: pointer;
+    transition: 0.2s;
+    font-size: 70px;
     
 }
 
 .selections {
     padding-top: 50px;
+    padding-bottom: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    gap: 33.3333%;
 
 }
 
-.selection:hover{
+.selections button:hover{
     transform: scale(1.2);
+    border-color: red;
 }
 
 .results {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 50px;
+}
+
+.result {
+    display: flex;
+    gap: 200px;
+    font-size: 50px;
+
 }
