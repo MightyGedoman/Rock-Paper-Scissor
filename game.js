@@ -2,97 +2,71 @@ console.log("Welcome");
 
 const option = ["rock", "paper", "scissor"];
 
+let playerChoice = ''
+
 const buttons = document.querySelectorAll('button');
 
 
-
-function getComputerChoice() {
-    const choice = option[Math.floor(Math.random() * option.length)]
-    return choice
-}
-
-
-function getPlayerChoice(callback) {
-    buttons.forEach(button => button.addEventListener('click', () => {
-      const player = button.textContent;
-      callback(player);
-    }));
-}
-
-
-// This is for the Typing method
-/* function getPlayerChoice() {
-    let valid = false;
-    while(valid !== true){
-        const choice = prompt('please input Rock, Paper, Scissor')
-        if(choice == null){
-            continue
-        }
-        const lowerChoice = choice.toLowerCase();
-        if(option.includes(lowerChoice)){
-            valid = true
-            return lowerChoice
-        }
-
-        
-    }
-} */
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playerChoice = button.textContent;
+        game();
+    });
+});
 
 function playRound(playerSelection, computerSelection){
     const result = checkWinner(playerSelection, computerSelection);
-    if(result == 'Tie'){
-        return 'Its a Tie'
+    if(result === 'Tie'){
+        return 'It\'s a Tie';
     }
-    else if(result == 'Player'){
-        return `You won! computer picked ${computerSelection}`
+    else if(result === 'Player'){
+        return `You won! Computer picked ${computerSelection}`;
     }
     else {
-        return `You lost... computer picked ${computerSelection}`
+        return `You lost... Computer picked ${computerSelection}`;
     }
-
 }
 
 function checkWinner(playerSelection, computerSelection){
-    if (playerSelection == computerSelection){
-        return 'Tie'
+    if (playerSelection === computerSelection){
+        return 'Tie';
     }
     else if(
-        (playerSelection == 'rock' && computerSelection == 'scissor') ||
-        (playerSelection == 'paper' && computerSelection == 'rock') ||
-        (playerSelection == 'scissor' && computerSelection == 'paper')      
+        (playerSelection === 'rock' && computerSelection === 'scissor') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'scissor' && computerSelection === 'paper')      
     ){
         return 'Player';
     }
     else {
-        return 'Computer'
+        return 'Computer';
     }
 }
 
-function game(){
-    let playerscore = 0
-    let computerscore = 0
+function game(playerChoice){
+    let playerScore = 0;
+    let computerScore = 0;
     for (let i = 0; i < 5; i++) {
-        const playerSelection = getPlayerChoice();
         const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-        console.log('-------------------------')
-        if(checkWinner(playerSelection, computerSelection) == 'Player') {
-            playerscore ++;
+        console.log(playRound(playerChoice, computerSelection));
+        console.log('-------------------------');
+        if(checkWinner(playerChoice, computerSelection) === 'Player') {
+            playerScore++;
         }
-        else if(checkWinner(playerSelection, computerSelection)){
-            computerscore ++;
+        else if(checkWinner(playerChoice, computerSelection) === 'Computer'){
+            computerScore++;
         }
     }
-    if(playerscore > computerscore){
-        console.log('Player has won!')
+    if(playerScore > computerScore){
+        console.log('Player has won!');
     }
-    else if(playerscore < computerscore);{
-        console.log('Computer has won')
+    else if(playerScore < computerScore){
+        console.log('Computer has won');
     }
+    console.log(`Player score is ${playerScore} and Computer score is ${computerScore}`);
+}
 
-    console.log(`Player score is ${playerscore} and Computer score is ${computerscore}`);
-    }
-
-
-
-game()
+function getComputerChoice() {
+    const randomIndex = Math.floor(Math.random() * option.length);
+    return option[randomIndex];
+}
