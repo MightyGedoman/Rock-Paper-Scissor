@@ -2,19 +2,32 @@ console.log("Welcome");
 
 const option = ["rock", "paper", "scissor"];
 
-let playerChoice = ''
+let computerScore = 0
+let playerScore = 0
+let round = 0
+let playerSelection
 
 const buttons = document.querySelectorAll('button');
+
+function getComputerChoice() {
+    const randomIndex = Math.floor(Math.random() * option.length);
+    return option[randomIndex];
+}
 
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        playerChoice = button.textContent;
-        game();
-    });
+        getPlayerChoice(button.textContent)
+        playRound()
+    })
 });
 
-function playRound(playerSelection, computerSelection){
+function getPlayerChoice(choice) {
+    playerSelection = choice
+}
+
+
+function roundChecker(playerSelection, computerSelection){
     const result = checkWinner(playerSelection, computerSelection);
     if(result === 'Tie'){
         return 'It\'s a Tie';
@@ -43,30 +56,31 @@ function checkWinner(playerSelection, computerSelection){
     }
 }
 
-function game(playerChoice){
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerChoice, computerSelection));
-        console.log('-------------------------');
-        if(checkWinner(playerChoice, computerSelection) === 'Player') {
-            playerScore++;
-        }
-        else if(checkWinner(playerChoice, computerSelection) === 'Computer'){
-            computerScore++;
-        }
+
+function playRound() {
+
+    const computerSelection = getComputerChoice();
+    console.log(playerSelection, computerSelection);
+    console.log(roundChecker(playerSelection, computerSelection));
+    console.log(`Player score is ${playerScore} and Computer score is ${computerScore}`);
+    console.log('-------------------------');
+    if (checkWinner(playerSelection, computerSelection) === 'Player') {
+        playerScore++;
+    } else if (checkWinner(playerSelection, computerSelection) === 'Computer') {
+        computerScore++;
     }
-    if(playerScore > computerScore){
+
+    if (playerScore == 5 || computerScore == 5){
+        endGame()
+    }
+};
+
+
+function endGame(){
+    if (playerScore > computerScore) {
         console.log('Player has won!');
-    }
-    else if(playerScore < computerScore){
+    } else if (playerScore < computerScore) {
         console.log('Computer has won');
     }
-    console.log(`Player score is ${playerScore} and Computer score is ${computerScore}`);
 }
 
-function getComputerChoice() {
-    const randomIndex = Math.floor(Math.random() * option.length);
-    return option[randomIndex];
-}
