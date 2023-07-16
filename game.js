@@ -4,7 +4,6 @@ const option = ["rock", "paper", "scissor"];
 
 let computerScore = 0
 let playerScore = 0
-let round = 0
 let playerSelection
 
 const buttons = document.querySelectorAll('button');
@@ -17,8 +16,14 @@ function getComputerChoice() {
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        getPlayerChoice(button.textContent)
-        playRound()
+        getPlayerChoice(button.textContent);
+        if (playerScore + computerScore < 5){
+            playRound();
+        }
+        else {
+            console.log('Game over!')
+        }
+        
     })
 });
 
@@ -60,18 +65,19 @@ function checkWinner(playerSelection, computerSelection){
 function playRound() {
 
     const computerSelection = getComputerChoice();
-    console.log(playerSelection, computerSelection);
-    console.log(roundChecker(playerSelection, computerSelection));
-    console.log(`Player score is ${playerScore} and Computer score is ${computerScore}`);
-    console.log('-------------------------');
+
     if (checkWinner(playerSelection, computerSelection) === 'Player') {
         playerScore++;
     } else if (checkWinner(playerSelection, computerSelection) === 'Computer') {
         computerScore++;
     }
+    console.log(playerSelection, computerSelection);
+    console.log(roundChecker(playerSelection, computerSelection));
+    console.log(`Player score is ${playerScore} and Computer score is ${computerScore}`);
+    console.log('-------------------------');
 
     if (playerScore == 5 || computerScore == 5){
-        endGame()
+        endGame();
     }
 };
 
